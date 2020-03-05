@@ -17,14 +17,17 @@ It is expected that stdout or results.json will contain the API response, which 
 
 Solutions in Windows Powershell
 
-docker build -t bigdata1:2.0 .
+docker build -t bigdata1:3.0 .
 
-docker run -e APP_KEY=%APP_KEY% -v C:\project1\bigdata1:/app/foo -it bigdata1:2.0 python main.py --page_size=1000 --num_pages=4 --output=foo/results.json
+docker run -e APP_KEY=%APP_KEY% -v C:\project1\bigdata1:/app/foo -it bigdata1:3.0 python main.py --page_size=1000 --num_pages=4 --output=foo/results.json
 
 
 docker login --username=laurachan
+
 docker images
-docker tag 1e09e6f91d5e laurachan/bigdata1:2.0
+
+docker tag f4c1cd5a81d8 laurachan/bigdata1:3.0
+
 docker push laurachan/bigdata1
 
 Delolyed into AWS EC2
@@ -33,5 +36,11 @@ sudo docker login --username=laurachan
 
 sudo docker pull laurachan/bigdata1
 
-sudo docker run -e APP_KEY=$APP_KEY -v $(pwd):/app/foo -it laurachan/bigdata1:2.0 python main.py --page_size=1000 --num_pages=4 --output=foo/results.json
+sudo docker run -e APP_KEY=$APP_KEY -v $(pwd):/app/foo -it laurachan/bigdata1:3.0 python main.py --page_size=1000 --num_pages=4 --output=foo/results.json
+
+sudo docker run -e APP_KEY=$APP_KEY -v $(pwd):/app/foo -it laurachan/bigdata1:3.0 python main.py --page_size=1000 --output=foo/results.json
+
+sudo docker run -e APP_KEY=$APP_KEY -v $(pwd):/app/foo -it laurachan/bigdata1:3.0 python main.py --page_size=1000 --num_pages=4
+
+sudo docker run -e APP_KEY=$APP_KEY -v $(pwd):/app/foo -it laurachan/bigdata1:3.0 python main.py --page_size=1000 
 
